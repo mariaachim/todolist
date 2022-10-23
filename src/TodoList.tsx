@@ -49,7 +49,3 @@ export function AddTask() {
         </div>
     )
 };
-
-function createStore<T>(arg0: { taskName: string; taskNum: number; done: boolean; }): [any, any] {
-    throw new Error('Function not implemented.');
-}
