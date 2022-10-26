@@ -1,51 +1,22 @@
 import { createSignal, For } from 'solid-js';
+import { Task, Tasks } from './App';
 
-type Task = {
-    taskName: string;
-    taskNum: number;
-    done: boolean;
-};
+export interface TodoListProps {
+    tasks: Task[];
+}
 
-const initialTasks: Task[] = [
-    { taskName: "Do work", taskNum: 1, done: false },
-    { taskName: "Test", taskNum: 2, done: false }
-];
-
-const handler = (task: string) => (event: Event) => {
-    initialTasks.push ({
-        taskName: task,
-        taskNum: Object.keys(initialTasks).length + 1,
-        done: false
-    });
-    console.log(initialTasks);
-};
-
-export function TodoList() {
-    const [tasks, setTasks] = createSignal(initialTasks);
-
+export function TodoList(props: TodoListProps) {
+    const totalTasks = () => props.tasks.length;
     return (
-        <><h2>Tasks completed: </h2><For each={tasks()}>
-            {(task) => {
+        <><h2>Number of tasks: {totalTasks()}</h2><For each={props.tasks}>
+            {(task, i) => {
                 return (
                     <div>
-                        <input type="checkbox" id={task.taskNum.toString()} name={task.taskNum.toString()} value={task.done.toString()} />
-                        <label for={task.taskNum.toString()}>{task.taskName}</label>
+                        <input type="checkbox" id={i().toString()} name="task" />
+                        <label for={i().toString()}>{task.taskName}</label>
                     </div>
                 );
-            } }
+            }}
         </For></>
     );
-};
-
-export function AddTask() {
-    return (
-        <div>
-            <form>
-                <label for="newTask">Add new task: </label>
-                <input type="text" id="newTask" name="newTask" />
-                <br />
-                <button type="button">Add Task</button>
-            </form>
-        </div>
-    )
 };
