@@ -1,21 +1,26 @@
-import { Setter, JSX, createSignal } from "solid-js";
-import { Task, Tasks } from "./App";
-import { TodoList, TodoListProps } from './TodoList';
+import { Setter, JSX, createSignal, createEffect } from "solid-js";
+import { createStore, SetStoreFunction, Store } from "solid-js/store";
+import { Task, createLocalStore } from "./App";
 
 export interface AddTaskProps {
     setTask: Setter<Task[]>;
 }
 
-const emptyTask: Task = { taskName: "" };
+const emptyTask: Task = { taskName: "", completed: false };
 
 export function AddTask(props: AddTaskProps) {
     const [newTask, setNewTask] = createSignal(emptyTask);
+    const [storageObjects, setStorageObjects] = createLocalStore<Task[]>([]);
     const addTask: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (event) => { // click handler
-        event.preventDefault(); // prevent default form behaviour of sending a POST request
-        props.setTask((tasks) => [...tasks, newTask()]); // keeps previous list of tasks and adds new task
-        setNewTask(emptyTask); // clears input field
-        console.log("this works");
-        console.log(Tasks);
+        if (newTask().taskName != "") {
+            setStorageObjects(storageObjects.length, {
+                taskName: newTask().taskName,
+                completed: false
+            });
+            event.preventDefault(); // prevent default form behaviour of sending a POST request
+            props.setTask((tasks) => [...tasks, newTask()]); // keeps previous list of tasks and adds new task
+            setNewTask(emptyTask); // clears input field
+        }
     };
 
     return (
@@ -26,9 +31,7 @@ export function AddTask(props: AddTaskProps) {
                     id="newTask" 
                     value={newTask().taskName} 
                     onInput={(e) => {
-                        setNewTask({ ...newTask(), taskName: e.currentTarget.value });
-                        console.log("yay");
-                        console.log(Tasks);
+                        setNewTask({ ...newTask(), taskName: e.currentTarget.value, completed: false });
                     }}
                 />
             </div>
