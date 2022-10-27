@@ -6,8 +6,6 @@ import { AddTask } from './AddTask';
 import logo from './logo.svg';
 import styles from './App.module.css';
 
-type Nullable<T> = T | null;
-
 export type Task = {
     taskName: string;
     completed: boolean;
