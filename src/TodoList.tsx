@@ -12,11 +12,11 @@ export function TodoList(props: TodoListProps) {
     const totalTasks = () => props.tasks.length;
     return (
         <><h2>Number of tasks: {totalTasks()}</h2><For each={props.tasks}>
-            {(task, i) => {
+            {(task) => {
                 return (
                     <div>
-                        <input type="checkbox" id={i().toString()} name="task" />
-                        <label for={i().toString()}>{task.taskName}</label>
+                        <input type="checkbox" id={task.taskID.toString()} name="task" />
+                        <label for={task.taskID.toString()}>{task.taskName}</label> 
                     </div>
                 );
             }}

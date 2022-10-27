@@ -6,7 +6,7 @@ export interface AddTaskProps {
     setTask: Setter<Task[]>;
 }
 
-const emptyTask: Task = { taskName: "", completed: false };
+const emptyTask: Task = { taskName: "", completed: false, taskID: 0 };
 
 export function AddTask(props: AddTaskProps) {
     const [newTask, setNewTask] = createSignal(emptyTask);

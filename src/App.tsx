@@ -6,9 +6,12 @@ import { AddTask } from './AddTask';
 import logo from './logo.svg';
 import styles from './App.module.css';
 
+type Nullable<T> = T | null;
+
 export type Task = {
     taskName: string;
     completed: boolean;
+    taskID: number;
 };
 
 export function createLocalStore<T extends object>(initState: T): 
@@ -17,16 +20,11 @@ export function createLocalStore<T extends object>(initState: T):
         if (localStorage.storageObjects) setState(JSON.parse(localStorage.storageObjects));
         createEffect(() => (localStorage.storageObjects = JSON.stringify(state)));
         return [state, setState];
-}
+    }
 
-// NOTE! use of localStorage is vulnerable to XSS attacks - https://dev.to/rdegges/please-stop-using-local-storage-1i04
-// perhaps use sessionStorage?
+// NOTE: use of local storage is vulnerable to XSS https://dev.to/rdegges/please-stop-using-local-storage-1i04
 
-
-let Tasks: Task[] = [
-    { taskName: "Do work", completed: false },
-    { taskName: "Test", completed: false }
-];
+let Tasks: Task[] = [];
 
 function MakeTasks() {
     if (localStorage.length > 0) {
@@ -34,24 +32,23 @@ function MakeTasks() {
         for (let i = 0; i < localStorageTasks.length; i++) {
             let object: Task = {
                 taskName: localStorageTasks[i]['taskName'],
-                completed: localStorageTasks[i]['completed']
+                completed: localStorageTasks[i]['completed'],
+                taskID: i
             }
-            console.log(object);
             Tasks.push(object);
         }
         return Tasks;
     } else {
         let Tasks: Task[] = [
-            { taskName: "Do work", completed: false },
-            { taskName: "Test", completed: false }
+            { taskName: "Do work", completed: false, taskID: 0 },
+            { taskName: "Test", completed: false, taskID: 1 }
         ];
         return Tasks;
     }
 }
 
 function MakeTodoList() {   
-    let tasksForFunction: Task[] = MakeTasks(); // not used yet
-    const [tasks, setTask] = createSignal(Tasks);
+    const [tasks, setTask] = createSignal(MakeTasks());
     return (
         <div>  
             <h1>Todo List</h1>
