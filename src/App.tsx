@@ -30,11 +30,8 @@ let Tasks: Task[] = [
 
 function MakeTasks() {
     if (localStorage.length > 0) {
-        console.log("this runs");
         let localStorageTasks = JSON.parse(localStorage.getItem('storageObjects')!);
-        console.log(localStorageTasks.length)
         for (let i = 0; i < localStorageTasks.length; i++) {
-            console.log("yay");
             let object: Task = {
                 taskName: localStorageTasks[i]['taskName'],
                 completed: localStorageTasks[i]['completed']
