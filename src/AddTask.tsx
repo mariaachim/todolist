@@ -14,7 +14,6 @@ export function AddTask(props: AddTaskProps) {
             setStorageObjects(storageObjects.length, {
                 taskName: newTask().taskName,
                 completed: false,
-                taskID: storageObjects.length
             });
             event.preventDefault(); // prevent default form behaviour of sending a POST request
             props.setTask((tasks) => [...tasks, newTask()]); // keeps previous list of tasks and adds new task
@@ -26,8 +25,7 @@ export function AddTask(props: AddTaskProps) {
         <form>
             <div>
                 <label for="newTask">Add new task: </label>
-                <input 
-                    id="newTask" 
+                <input
                     value={newTask().taskName} 
                     onInput={(e) => {
                         setNewTask({ ...newTask(), taskName: e.currentTarget.value });

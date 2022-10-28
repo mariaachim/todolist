@@ -27,9 +27,9 @@ export function TodoList(props: TodoListProps) {
         <For each={props.tasks}>
             {(task) => {
                 return (
-                // TODO: add button to remove task from list - change following taskID variables
+                // TODO: add button to remove task from list
                     <div>
-                        <input type="checkbox" id={task.taskID.toString()} name="task" checked={task.completed} onChange={() => {
+                        <input type="checkbox" name="task" checked={task.completed} onChange={() => {
                             props.setTasks((tasks) => {  
                                 let newList = tasks.map((oldTask) =>
                                     task === oldTask ? { ...oldTask, completed: !oldTask.completed } : oldTask
@@ -39,7 +39,7 @@ export function TodoList(props: TodoListProps) {
                                 return newList;
                             }); 
                         }} />
-                        <label for={task.taskID.toString()}>{task.taskName}</label>
+                        <label>{task.taskName}</label>
                         <button type="button" onclick={() => {
                             /*props.setTasks((tasks) => {
                                 let newList = tasks.map((oldTask) =>

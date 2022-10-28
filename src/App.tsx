@@ -9,10 +9,9 @@ import styles from './App.module.css';
 export type Task = {
     taskName: string;
     completed: boolean;
-    taskID: number;
 };
 
-export const emptyTask: Task = { taskName: "", completed: false, taskID: 0 };
+export const emptyTask: Task = { taskName: "", completed: false };
 
 export function createLocalStore<T extends object>(initState: T): 
     [Store<T>, SetStoreFunction<T>] {
@@ -33,15 +32,14 @@ function MakeTasks() {
             let object: Task = {
                 taskName: localStorageTasks[i]['taskName'],
                 completed: localStorageTasks[i]['completed'],
-                taskID: i
             }
             Tasks.push(object);
         }
         return Tasks;
     } else {
         let Tasks: Task[] = [
-            { taskName: "Do work", completed: true, taskID: 0 },
-            { taskName: "Test", completed: false, taskID: 1 }
+            { taskName: "Do work", completed: true },
+            { taskName: "Test", completed: false }
         ];
         localStorage.setItem('storageObjects', JSON.stringify(Tasks));
         return Tasks;
