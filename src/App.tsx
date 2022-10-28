@@ -53,7 +53,7 @@ function MakeTodoList() {
     return (
         <div>  
             <h1>Todo List</h1>
-            <TodoList tasks={tasks()} />
+            <TodoList tasks={tasks()} setTasks={setTask} />
             <AddTask setTask={setTask} />
         </div>
     );

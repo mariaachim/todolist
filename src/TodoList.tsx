@@ -1,23 +1,16 @@
-import { createSignal, For, JSX } from 'solid-js';
+import { createSignal, For, JSX, Setter } from 'solid-js';
 import { Task, createLocalStore, emptyTask } from './App';
 import { AddTask } from './AddTask';
 import { Properties } from 'solid-js/web';
 
 export interface TodoListProps {
     tasks: Task[];
+    setTasks: Setter<Task[]>;
 }
 
 let localStorageTasks: string[] = []
 
 export function TodoList(props: TodoListProps) {
-    const [taskToUpdate, setTaskToUpdate] = createSignal(emptyTask);
-    const updateTasks: JSX.EventHandler<HTMLInputElement, MouseEvent> = (event) => {
-        //localStorage.setItem(storageObjects[taskToUpdate.taskID]('completed', JSON.stringify(true)));
-        console.log("checked");
-        event.preventDefault();
-    };
-
-
     let totalTasks = props.tasks.length;
     let completedTasks = 0;
     props.tasks.forEach(function (task) {
@@ -28,14 +21,27 @@ export function TodoList(props: TodoListProps) {
     console.log(completedTasks);
     return (
         <><h2>Number of tasks: {totalTasks}</h2>
-        <h2>Tasks competed: {completedTasks}</h2>
+        <h2>Tasks completed: {completedTasks}</h2>
         <For each={props.tasks}>
             {(task) => {
                 return (
                 // TODO: add button to remove task from list
-                // TODO: change state of completed if checkbox is ticked
+                // BUG: does not update "tasks completed"
                     <div>
-                        <input type="checkbox" id={task.taskID.toString()} name="task" onclick={updateTasks} checked={task.completed} />
+                        <input type="checkbox" id={task.taskID.toString()} name="task" checked={task.completed} onChange={() => {
+                            const [taskToUpdate, setTaskToUpdate] = createSignal(props.tasks)
+                            props.setTasks((tasks) => {
+                            
+                                const newList = tasks.map((oldTask) =>
+                                    task === oldTask ? { ...oldTask, completed: !oldTask.completed } : oldTask
+                                );
+                                console.log("changed")
+                                localStorage.setItem('storageObjects',JSON.stringify(newList));
+                                completedTasks++;
+                                console.log(newList);
+                                return newList;
+                            }); 
+                        }} />
                         <label for={task.taskID.toString()}>{task.taskName}</label>
                     </div>
                 );
