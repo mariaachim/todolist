@@ -38,7 +38,7 @@ function MakeTasks() {
         return Tasks;
     } else {
         let Tasks: Task[] = [
-            { taskName: "Do work", completed: false, taskID: 0 },
+            { taskName: "Do work", completed: true, taskID: 0 },
             { taskName: "Test", completed: false, taskID: 1 }
         ];
         return Tasks;
