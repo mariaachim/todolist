@@ -3,7 +3,7 @@ import { createStore, SetStoreFunction, Store } from 'solid-js/store';
 import { TodoList } from './TodoList';
 import { AddTask } from './AddTask';
 
-import logo from './logo.svg';
+import logo from './todolist-logo.png';
 import styles from './App.module.css';
 
 export type Task = {
@@ -51,8 +51,11 @@ function MakeTasks() {
 function MakeTodoList() {   
     const [tasks, setTask] = createSignal(MakeTasks());
     return (
-        <div>  
-            <h1>Todo List</h1>
+        <div>
+            <div class="header">
+                <img src={logo} alt="logo" />
+                <h1>Todo List</h1>
+            </div>
             <TodoList tasks={tasks()} setTasks={setTask} />
             <AddTask setTask={setTask} />
         </div>
