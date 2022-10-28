@@ -1,7 +1,5 @@
-import { createSignal, For, JSX, Setter } from 'solid-js';
-import { Task, createLocalStore, emptyTask } from './App';
-import { AddTask } from './AddTask';
-import { Properties } from 'solid-js/web';
+import { For, Setter } from 'solid-js';
+import { Task } from './App';
 
 export interface TodoListProps {
     tasks: Task[];
@@ -9,7 +7,11 @@ export interface TodoListProps {
 }
 
 export function TodoList(props: TodoListProps) {
-    let totalTasks = props.tasks.length;
+
+    function SetTotalTasks() {
+        let totalTasks = props.tasks.length;
+        return totalTasks
+    }
 
     function SetTasksCompleted() {
         let completedTasks = 0;
@@ -22,12 +24,11 @@ export function TodoList(props: TodoListProps) {
     }
 
     return (
-        <><h2>Number of tasks: {totalTasks}</h2>
+        <><h2>Number of tasks: {SetTotalTasks()}</h2>
         <h2>Tasks completed: {SetTasksCompleted()}</h2>
         <For each={props.tasks}>
             {(task) => {
                 return (
-                // TODO: add button to remove task from list
                     <div>
                         <input type="checkbox" name="task" checked={task.completed} onChange={() => {
                             props.setTasks((tasks) => {  
@@ -41,14 +42,15 @@ export function TodoList(props: TodoListProps) {
                         }} />
                         <label>{task.taskName}</label>
                         <button type="button" onclick={() => {
-                            /*props.setTasks((tasks) => {
-                                let newList = tasks.map((oldTask) =>
-                                    task === oldTask ? {} : oldTask
+                            props.setTasks((tasks) => {
+                                let newList = tasks.filter((oldTask) =>
+                                    (task !== oldTask)
                                 );
                                 localStorage.setItem('storageObjects', JSON.stringify(newList));
+                                SetTotalTasks();
                                 SetTasksCompleted();
                                 return newList;
-                            });*/
+                            });
                         }}>x</button>
                     </div>
                 );

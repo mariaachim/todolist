@@ -1,5 +1,4 @@
-import { Setter, JSX, createSignal, createEffect } from "solid-js";
-import { createStore, SetStoreFunction, Store } from "solid-js/store";
+import { Setter, JSX, createSignal } from "solid-js";
 import { Task, createLocalStore, emptyTask } from "./App";
 
 export interface AddTaskProps {

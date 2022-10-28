@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 import { createStore, SetStoreFunction, Store } from 'solid-js/store';
 import { TodoList } from './TodoList';
 import { AddTask } from './AddTask';
