@@ -41,7 +41,7 @@ export function TodoList(props: TodoListProps) {
                             }); 
                         }} />
                         <label>{task.taskName}</label>
-                        <button type="button" onclick={() => {
+                        <button type="button" class="button remove" onclick={() => {
                             props.setTasks((tasks) => {
                                 let newList = tasks.filter((oldTask) =>
                                     (task !== oldTask)
@@ -52,6 +52,7 @@ export function TodoList(props: TodoListProps) {
                                 return newList;
                             });
                         }}>x</button>
+                        <p></p>
                     </div>
                 );
             }}

@@ -31,6 +31,7 @@ export function AddTask(props: AddTaskProps) {
                     }}
                 />
             </div>
+            <p></p>
             <button type="submit" onClick={addTask}>Add Task</button>
         </form>
     );
