@@ -18,7 +18,6 @@ export function TodoList(props: TodoListProps) {
                 completedTasks ++;
             };
         });
-        console.log(completedTasks);
         return completedTasks;
     }
 
@@ -28,19 +27,29 @@ export function TodoList(props: TodoListProps) {
         <For each={props.tasks}>
             {(task) => {
                 return (
-                // TODO: add button to remove task from list
+                // TODO: add button to remove task from list - change following taskID variables
                     <div>
                         <input type="checkbox" id={task.taskID.toString()} name="task" checked={task.completed} onChange={() => {
                             props.setTasks((tasks) => {  
-                                const newList = tasks.map((oldTask) =>
+                                let newList = tasks.map((oldTask) =>
                                     task === oldTask ? { ...oldTask, completed: !oldTask.completed } : oldTask
                                 );
-                                localStorage.setItem('storageObjects',JSON.stringify(newList));
+                                localStorage.setItem('storageObjects', JSON.stringify(newList));
                                 SetTasksCompleted();
-                                return newList
+                                return newList;
                             }); 
                         }} />
                         <label for={task.taskID.toString()}>{task.taskName}</label>
+                        <button type="button" onclick={() => {
+                            /*props.setTasks((tasks) => {
+                                let newList = tasks.map((oldTask) =>
+                                    task === oldTask ? {} : oldTask
+                                );
+                                localStorage.setItem('storageObjects', JSON.stringify(newList));
+                                SetTasksCompleted();
+                                return newList;
+                            });*/
+                        }}>x</button>
                     </div>
                 );
             }}
