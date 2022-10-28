@@ -1,12 +1,10 @@
 import { Setter, JSX, createSignal, createEffect } from "solid-js";
 import { createStore, SetStoreFunction, Store } from "solid-js/store";
-import { Task, createLocalStore } from "./App";
+import { Task, createLocalStore, emptyTask } from "./App";
 
 export interface AddTaskProps {
     setTask: Setter<Task[]>;
 }
-
-const emptyTask: Task = { taskName: "", completed: false, taskID: 0 };
 
 export function AddTask(props: AddTaskProps) {
     const [newTask, setNewTask] = createSignal(emptyTask);
@@ -15,7 +13,8 @@ export function AddTask(props: AddTaskProps) {
         if (newTask().taskName != "") {
             setStorageObjects(storageObjects.length, {
                 taskName: newTask().taskName,
-                completed: false
+                completed: false,
+                taskID: storageObjects.length
             });
             event.preventDefault(); // prevent default form behaviour of sending a POST request
             props.setTask((tasks) => [...tasks, newTask()]); // keeps previous list of tasks and adds new task
@@ -31,7 +30,7 @@ export function AddTask(props: AddTaskProps) {
                     id="newTask" 
                     value={newTask().taskName} 
                     onInput={(e) => {
-                        setNewTask({ ...newTask(), taskName: e.currentTarget.value, completed: false });
+                        setNewTask({ ...newTask(), taskName: e.currentTarget.value });
                     }}
                 />
             </div>

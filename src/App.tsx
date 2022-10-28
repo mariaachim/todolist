@@ -12,6 +12,8 @@ export type Task = {
     taskID: number;
 };
 
+export const emptyTask: Task = { taskName: "", completed: false, taskID: 0 };
+
 export function createLocalStore<T extends object>(initState: T): 
     [Store<T>, SetStoreFunction<T>] {
         const [state, setState] = createStore(initState);
@@ -25,8 +27,8 @@ export function createLocalStore<T extends object>(initState: T):
 let Tasks: Task[] = [];
 
 function MakeTasks() {
+    let localStorageTasks = JSON.parse(localStorage.getItem('storageObjects')!);
     if (localStorage.length > 0) {
-        let localStorageTasks = JSON.parse(localStorage.getItem('storageObjects')!);
         for (let i = 0; i < localStorageTasks.length; i++) {
             let object: Task = {
                 taskName: localStorageTasks[i]['taskName'],
@@ -41,6 +43,7 @@ function MakeTasks() {
             { taskName: "Do work", completed: true, taskID: 0 },
             { taskName: "Test", completed: false, taskID: 1 }
         ];
+        localStorage.setItem('storageObjects', JSON.stringify(Tasks));
         return Tasks;
     }
 }

@@ -1,5 +1,5 @@
-import { createSignal, For } from 'solid-js';
-import { Task, createLocalStore } from './App';
+import { createSignal, For, JSX } from 'solid-js';
+import { Task, createLocalStore, emptyTask } from './App';
 import { AddTask } from './AddTask';
 import { Properties } from 'solid-js/web';
 
@@ -10,6 +10,14 @@ export interface TodoListProps {
 let localStorageTasks: string[] = []
 
 export function TodoList(props: TodoListProps) {
+    const [taskToUpdate, setTaskToUpdate] = createSignal(emptyTask);
+    const updateTasks: JSX.EventHandler<HTMLInputElement, MouseEvent> = (event) => {
+        //localStorage.setItem(storageObjects[taskToUpdate.taskID]('completed', JSON.stringify(true)));
+        console.log("checked");
+        event.preventDefault();
+    };
+
+
     let totalTasks = props.tasks.length;
     let completedTasks = 0;
     props.tasks.forEach(function (task) {
@@ -25,12 +33,9 @@ export function TodoList(props: TodoListProps) {
             {(task) => {
                 return (
                 // TODO: add button to remove task from list
+                // TODO: change state of completed if checkbox is ticked
                     <div>
-                        { task.completed ? (
-                            <input type="checkbox" id={task.taskID.toString()} name="task" checked />
-                        ) : (
-                            <input type="checkbox" id={task.taskID.toString()} name="task" />
-                        )}
+                        <input type="checkbox" id={task.taskID.toString()} name="task" onclick={updateTasks} checked={task.completed} />
                         <label for={task.taskID.toString()}>{task.taskName}</label>
                     </div>
                 );
