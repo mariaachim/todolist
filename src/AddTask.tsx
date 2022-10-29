@@ -22,6 +22,8 @@ export function AddTask(props: AddTaskProps) {
     
     const removeList: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (event) => {
         localStorage.clear();
+        event.preventDefault();
+        props.setTask((tasks) => []);
     };
 
     return (
@@ -40,7 +42,7 @@ export function AddTask(props: AddTaskProps) {
             <button type="submit" onClick={addTask}>Add Task</button>
             <button type="button" onClick={removeList}>Clear List</button>
             <p></p>
-            
+
         </form>
     );
 }
