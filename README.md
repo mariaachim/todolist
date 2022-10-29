@@ -1,3 +1,11 @@
+# Todo List Webapp
+
+A dynamic web application made using Solid.js and TypeScript.
+
+Hosting kindly provided by https://github.com/404dcd
+
+Website logo obtained from https://freeicons.io/education/checklist-clipboard-tasks-todo-icon-38370
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
