@@ -71,6 +71,7 @@ button {
   border-radius: 8px;
   border-width: 0px;
   transition-duration: 0.4s;
+  padding: 10px;
 }
 
 .add:hover {
@@ -82,6 +83,7 @@ button {
   border-radius: 8px;
   border-width: 0px;
   transition-duration: 0.4s;
+  padding: 10px;
 }
 
 .clear:hover {
