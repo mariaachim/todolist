@@ -6,6 +6,8 @@ Hosting kindly provided by https://github.com/404dcd
 
 Website logo obtained from https://freeicons.io/education/checklist-clipboard-tasks-todo-icon-38370
 
+(For marking purposes - main HTML is found in App.tsx, AddTask.tsx and TodoList.tsx)
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
