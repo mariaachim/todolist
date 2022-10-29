@@ -58,6 +58,7 @@ button {
   left: 10px;
   bottom: 1px;
   border-radius: 8px;
+  border-width: 0px;
   transition-duration: 0.4s;
 }
 
@@ -68,6 +69,7 @@ button {
 
 .add {
   border-radius: 8px;
+  border-width: 0px;
   transition-duration: 0.4s;
 }
 
@@ -78,6 +80,7 @@ button {
 
 .clear {
   border-radius: 8px;
+  border-width: 0px;
   transition-duration: 0.4s;
 }
 
