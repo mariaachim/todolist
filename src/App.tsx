@@ -3,7 +3,7 @@ import { createStore, SetStoreFunction, Store } from 'solid-js/store';
 import { TodoList } from './TodoList';
 import { AddTask } from './AddTask';
 
-import logo from './todolist-logo.png';
+import logo from './todolist-logo.png'; // https://freeicons.io/education/checklist-clipboard-tasks-todo-icon-38370
 import styles from './App.module.css';
 
 export type Task = {
@@ -37,11 +37,6 @@ function MakeTasks() {
         }
         return Tasks;
     } else {
-        let Tasks: Task[] = [
-            { taskName: "Do work", completed: true },
-            { taskName: "Test", completed: false }
-        ];
-        localStorage.setItem('storageObjects', JSON.stringify(Tasks));
         return Tasks;
     }
 }
@@ -50,12 +45,17 @@ function MakeTodoList() {
     const [tasks, setTask] = createSignal(MakeTasks());
     return (
         <div>
-            <div class="header">
+            <header>
                 <img src={logo} alt="logo" />
                 <h1>Todo List</h1>
-            </div>
+            </header>
+
             <TodoList tasks={tasks()} setTasks={setTask} />
             <AddTask setTask={setTask} />
+
+            <footer>
+                <a href="https://github.com/mariaachim/todolist">GitHub repo link</a>
+            </footer>
         </div>
     );
 }
