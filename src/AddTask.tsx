@@ -38,10 +38,11 @@ export function AddTask(props: AddTaskProps) {
                 />
             </div>
 
-            <p></p>
-            <button type="submit" onClick={addTask}>Add Task</button>
-            <button type="button" onClick={removeList}>Clear List</button>
-            <p></p>
+            <p class="divider" />
+            <button type="submit" class="button add" onClick={addTask}>Add Task</button>
+            <p class="button-divider" />
+            <button type="button" class="button clear" onClick={removeList}>Clear List</button>
+            <p class="divider" />
 
         </form>
     );

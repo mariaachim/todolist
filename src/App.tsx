@@ -45,13 +45,15 @@ function MakeTodoList() {
     const [tasks, setTask] = createSignal(MakeTasks());
     return (
         <div>
-            <header>
-                <img src={logo} alt="logo" />
-                <h1>Todo List</h1>
-            </header>
+            <div class="content">
+                <header>
+                    <img src={logo} alt="logo" />
+                    <h1>Todo List</h1>
+                </header>
 
-            <TodoList tasks={tasks()} setTasks={setTask} />
-            <AddTask setTask={setTask} />
+                <TodoList tasks={tasks()} setTasks={setTask} />
+                <AddTask setTask={setTask} />
+            </div>
 
             <footer>
                 <a href="https://github.com/mariaachim/todolist">GitHub repo link</a>

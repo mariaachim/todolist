@@ -51,8 +51,8 @@ export function TodoList(props: TodoListProps) {
                                 SetTasksCompleted();
                                 return newList;
                             });
-                        }}>x</button>
-                        <p></p>
+                        }}>&#x2715;</button>
+                        <p class="divider"></p>
                     </div>
                 );
             }}
