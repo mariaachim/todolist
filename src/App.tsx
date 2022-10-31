@@ -56,7 +56,7 @@ function MakeTodoList() {
             </div>
 
             <footer>
-                <a href="https://github.com/mariaachim/todolist">GitHub repo link</a>
+                <p><a href="https://github.com/mariaachim/todolist">GitHub repo link</a></p>
             </footer>
         </div>
     );
